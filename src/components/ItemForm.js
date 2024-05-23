@@ -2,27 +2,19 @@ import React, { useState } from "react";
 import { v4 as uuid } from "uuid";
 
 function ItemForm({ onItemFormSubmit }) {
-  const [name, setName] = useState("");
-  const [category, setCategory] = useState("Produce");
-
-  function handleNameChange(event) {
-    setName(event.target.value);
-  }
-
-  function handleCategoryChange(event) {
-    setCategory(event.target.value);
-  }
+  const [itemName, setItemName] = useState("");
+  const [itemCategory, setItemCategory] = useState("Produce");
 
   function handleSubmit(event) {
     event.preventDefault();
     const newItem = {
       id: uuid(),
-      name: name,
-      category: category,
+      name: itemName,
+      category: itemCategory,
     };
     onItemFormSubmit(newItem);
-    setName(""); // Reset the form fields
-    setCategory("Produce");
+    setItemName("");
+    setItemCategory("Produce");
   }
 
   return (
@@ -32,8 +24,8 @@ function ItemForm({ onItemFormSubmit }) {
         <input
           type="text"
           name="name"
-          value={name}
-          onChange={handleNameChange}
+          value={itemName}
+          onChange={(e) => setItemName(e.target.value)}
         />
       </label>
 
@@ -41,8 +33,8 @@ function ItemForm({ onItemFormSubmit }) {
         Category:
         <select
           name="category"
-          value={category}
-          onChange={handleCategoryChange}
+          value={itemCategory}
+          onChange={(e) => setItemCategory(e.target.value)}
         >
           <option value="Produce">Produce</option>
           <option value="Dairy">Dairy</option>
